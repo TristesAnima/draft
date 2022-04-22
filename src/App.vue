@@ -1,26 +1,31 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div style="width: 100%; height: 90%">
+    <QuillEditor theme="snow" toolbar="full" v-model:content="content" contentType="html" />
+  </div>
+  <textarea style="width: 100%; height: 96%" v-model="content"></textarea>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import { reactive, toRefs } from 'vue'
+import { QuillEditor } from '@vueup/vue-quill'
+import '@vueup/vue-quill/dist/vue-quill.snow.css'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    QuillEditor
+  },
+  setup () {
+    const data = reactive({
+      toolbar: ['bold', 'italic', 'underline', 'strike'],
+      content: ''
+    })
+
+    return {
+      ...toRefs(data)
+    }
   }
 }
 </script>
 
-<style lang="less">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<style lang="less"></style>
